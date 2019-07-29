@@ -1,0 +1,10 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <article>
+    <img src="{{ post.thumbnail.src|resize(1200, 300) }}">
+    <h1>{{post.title}}</h1>
+    <p><time>{{ post.date }}</time></p>
+    {{post.content}}
+  </article>
+{% endblock %}

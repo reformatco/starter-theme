@@ -1,0 +1,46 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+
+		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+
+    <header id="site-header" class="header" >
+			{% block header %}
+				<div class="wrap">
+					<div class="branding" role="banner">
+						<a class="logo" href="{{site.url}}" rel="home">{{site.name}}</a>
+					</div>
+					<nav id="navbar" class="navbar-menu" role="navigation">
+						{% include "menu.twig" with {'items': menu.get_items} %}
+					</nav>
+				</div>
+			{% endblock %}
+		</header>
+
+    <main id="content" role="main">
+      {% block content %}
+			  Sorry, no content
+			{% endblock %}
+    </main>
+
+		{% block footer %}
+			<footer id="site-footer">
+        {{footer_widgets}}
+
+        <nav id="footer-links" role="navigation">
+					{% include "menu.twig" with {'items': footer_menu.get_items} %}
+				</nav>
+
+				<p>Copyright {{"now"|date('Y')}}</p>
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+    <!-- Website made by Reformat (https://reformat.co) -->
+	</body>
+</html>

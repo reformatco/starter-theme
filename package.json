@@ -1,0 +1,50 @@
+{
+  "name": "reformat-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "url": "vcf.localhost",
+  "srcPath": "./src/",
+  "assetsPath": "./dist/",
+  "themePath": "/content/themes/reformat-starter/",
+  "scripts": {
+    "postinstall": "[ -f tailwind.config.js ] || npx tailwind init --full --no-comments",
+    "dev": "NODE_ENV=development gulp",
+    "build": "NODE_ENV=production gulp build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@fullhuman/postcss-purgecss": "^1.2.0",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "cssnano": "^4.1.10",
+    "del": "^5.0.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^6.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "postcss-color-function": "^4.1.0",
+    "postcss-import": "^12.0.1",
+    "postcss-import-ext-glob": "^1.1.0",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-utilities": "^0.8.2",
+    "precss": "^4.0.0",
+    "tailwindcss": "^1.0.5",
+    "terser-webpack-plugin": "^1.3.0",
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
+  }
+}

@@ -1,0 +1,10 @@
+@import-glob './global/*.css';
+@import-glob './lib/*.css';
+@import-glob './components/*.css';
+@import-glob './templates/*.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* custom utilities here */
