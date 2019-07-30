@@ -4,5 +4,10 @@
   <article>
     <h1>{{post.title}}</h1>
     {{post.content}}
+
+    {% for module in post.meta('modules') %}
+      {% include "components/#{module.acf_fc_layout}.twig" with module %}
+    {% endfor %}
+
   </article>
 {% endblock %}

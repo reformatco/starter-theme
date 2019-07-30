@@ -6,12 +6,14 @@ import {
   parallel,
 } from 'gulp';
 import browsersync from 'browser-sync';
+import cssnano from 'gulp-cssnano';
 import del from 'del';
 import eslint from 'gulp-eslint';
 import gulpif from 'gulp-if';
 import imagemin from 'gulp-imagemin';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
+import purgecss from 'gulp-purgecss';
 import sourcemaps from 'gulp-sourcemaps';
 import webpack from 'webpack-stream';
 import config from './package.json';
@@ -43,6 +45,19 @@ export const styles = () => src(`${config.srcPath}/css/style.css`)
   .pipe(dest(`${config.assetsPath}css`))
   .pipe(server.stream());
 
+export const editorStyles = () => src(`${config.srcPath}/css/editor-style.css`)
+  .pipe(postcss())
+  .pipe(purgecss({ content: [`${config.srcPath}/html/tinymce.html`] }))
+  .pipe(cssnano())
+  .pipe(dest('./'))
+  .pipe(server.stream());
+
+export const adminStyles = () => src(`${config.srcPath}/css/admin.css`)
+  .pipe(postcss())
+  .pipe(cssnano())
+  .pipe(dest(`${config.assetsPath}css`))
+  .pipe(server.stream());
+
 export const images = () => src(`${config.srcPath}/img/**/*.{jpg,jpeg,png,svg,gif}`)
   .pipe(gulpif(process.env.NODE_ENV === 'production', imagemin()))
   .pipe(dest(`${config.assetsPath}img`));
@@ -53,11 +68,12 @@ export const fonts = () => src(`${config.srcPath}/webfonts/**/*`)
 
 const jsFixed = file => file.eslint !== null && file.eslint.fixed;
 
-export const scriptLint = () => src(['./gulpfile.babel.js', `${config.srcPath}/js/app.js`])
+export const scriptLint = () => src(`${config.srcPath}/js/app.js`)
   .pipe(plumber())
   .pipe(eslint({ fix: true }))
   .pipe(eslint.format())
-  .pipe(gulpif(jsFixed, dest({ overwrite: true })));
+  .pipe(gulpif(jsFixed, dest(`${config.assetsPath}js`)))
+  .pipe(eslint.failAfterError());
 
 export const scripts = () => src([`${config.srcPath}/js/app.js`])
   .pipe(plumber())
@@ -85,8 +101,8 @@ export const scripts = () => src([`${config.srcPath}/js/app.js`])
   .pipe(server.stream());
 
 export const watchFiles = () => {
-  watch(`${config.srcPath}css/**/*`, styles);
-  watch('./tailwind.config.js', styles);
+  watch(`${config.srcPath}css/**/*`, series(styles, editorStyles, adminStyles));
+  watch('./tailwind.config.js', series(styles, editorStyles, adminStyles));
   watch(`${config.srcPath}js/**/*`, series(scriptLint, scripts));
   watch(`${config.srcPath}img/**/*`, images);
   watch('./**/*.php', reload);
@@ -94,6 +110,7 @@ export const watchFiles = () => {
 };
 
 export const js = series(scriptLint, scripts);
-export const dev = series(clean, parallel(styles, images, fonts, scripts), serve, watchFiles);
-export const build = series(clean, parallel(styles, images, fonts, scripts));
+// eslint-disable-next-line max-len
+export const dev = series(clean, parallel(styles, editorStyles, adminStyles, images, fonts, scripts), serve, watchFiles);
+export const build = series(clean, parallel(styles, editorStyles, adminStyles, images, fonts, scripts));
 export default dev;
