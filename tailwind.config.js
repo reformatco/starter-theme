@@ -1,5 +1,4 @@
 module.exports = {
-  prefix: 'bleh',
   important: false,
   separator: ':',
   theme: {

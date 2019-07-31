@@ -1,0 +1,19 @@
+{% set total = module.slides|length %}
+<div class="banner">
+{% for slide in module.slides %}
+  {% set img = slide.photo %}
+  {% set theme = slide.colours %}
+  <figure class="slide {{theme|join(' ')}}">
+    {% if img %}
+      <img src="{{ img.sizes.banner }}" srcset="{{ img.sizes.banner|retina(2) }} 2x" alt="{{ img.alt }}" class="w-full h-full object-cover">
+    {% endif %}
+    {% if slide.overlay_text %}
+      <figcaption class="slide-caption">{{slide.overlay_text}}</figcaption>
+    {% endif %}
+
+    {% if slide.comp_text %}
+      <aside class="slide-compliment">{{slide.comp_text}}</aside>
+    {% endif %}
+  </figure>
+{% endfor %}
+</div>

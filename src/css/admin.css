@@ -69,3 +69,37 @@
     }
   }
 }
+
+.swatches .acf-button-group label {
+  border-radius:2rem !important;
+  margin-right:5px;
+  border:2px solid white;
+  text-indent:-999em;
+  width:2rem;
+  height:2rem;
+  padding:0;
+}
+
+.swatches .acf-button-group input {
+
+}
+
+.swatches .acf-button-group label.selected {
+  border:2px solid #333;
+}
+
+/* manual stuff */
+
+/* only used for the swatch */
+
+.bg-red,
+.text-red {
+  background-color: red !important;
+  color:white;
+}
+
+.bg-blue,
+.text-blue {
+  background-color: blue !important;
+  color:white;
+}

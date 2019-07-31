@@ -24,6 +24,12 @@
 ```npm run build``` will package up all resources and minify within ```dist``` directory
 
 ## ACF Modules
+
+### Regular Site
+
+- settings (these are hidden and simply cloned to flexible fields)
+  - color
+  - bgcolor
 - hero
   - slider
     - slide
@@ -32,29 +38,34 @@
       - link
       - blurb
       - image
-      - color
-      - bgcolor (no image)
-- content feature
+      - color*
+      - bgcolor*
+- feature
   - item (up to 4)
     - title
     - blurb
     - thumbnail
-    - bgcolor
+    - color*
+    - bgcolor*
 - stats
   - item (up to 4)
-    - color
     - size
     - text before
     - info
     - text after
+    - color*
+    - bgcolor*
+
 - facts
   - slider
     - slide
       - photo
-      - bgcolor (no image)
       - title (did you know default)
       - blurb
       - link
+      - color*
+      - bgcolor*
+- slider
 - text_row*
   - columns (up to 2)
     - wysiwyg
@@ -73,12 +84,32 @@
   - item
     - title
     - info
-- aside
+- pullout
   - slider
     - blurb
     - color
+- video
 - related
   - items (up to 4)
+
+### Fullpage Modules
+
+- full bleed
+  - image
+- border image
+  - image
+  - bgcolor
+- text
+  - blurb
+  - color
+  - bgcolor
+- gif (use frontend from mapp)
+  - gallery
+  - speed
+- slider
+  - slides (clone all other items)
+
+
 
 ### Todo:
 

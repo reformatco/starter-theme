@@ -1,11 +1,15 @@
+<div class="md:flex -mx-4">
 {% set total = module.images|length %}
 {% for image in module.images %}
   {% set img = image.image %}
-  <figure style="width:600px;">
+  {% if img %}
+  <figure class="px-4">
     {# <img src="{{ img.url|resize(500) }}" alt="{{ img.alt }}"> #}
     <img src="{{ img.sizes.square }}" srcset="{{ img.sizes.square|retina(2) }} 2x" alt="{{ img.alt }}">
     {% if img.caption %}
     <figcaption>{{img.caption}}</figcaption>
     {% endif %}
   </figure>
+  {% endif %}
 {% endfor %}
+</div>

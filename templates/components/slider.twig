@@ -1,0 +1,6 @@
+{% set total = module.photos|length %}
+<div class="slider" data-flickity{% if module.options %}='{ "{{module.options|join('":"true", "')}}":"true" }'{% endif %}>
+{% for img in module.photos %}
+  <img src="{{ img.sizes.large }}" srcset="{{ img.sizes.large|retina(2) }} 2x" alt="{{ img.alt }}">
+{% endfor %}
+</div>
