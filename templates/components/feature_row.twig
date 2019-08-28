@@ -1,0 +1,26 @@
+{% extends "components/base.twig" %}
+
+{% block class %}m--feature-row {{ module.theme|join(' ') }}{% endblock %}
+
+{% block inner %}
+  {% if module.title %}<header><h2>{{ module.title }}</h2></header>{% endif %}
+  <div class="md:flex -mx-4 md:justify-center">
+  {% for item in module.items %}
+    <div class="px-4 text-center">
+      {% set link = item.link %}
+      <a href="{{ link.url }}" target="{{ link.target }}"{% if link.target == '_blank' %} rel="noopener"{% endif %} aria-label="Go to {{ link.title }}">
+        {% if item.image %}
+        <img src="{{ item.image.sizes['thumbnail'] }}" srcset="{{ item.image.sizes['thumbnail'] | retina(2) }} 2x" alt="" />
+        {% else %}
+        <img src="data:image/png;base64, {{ placeholder.profile }}">
+        {% endif %}
+      </a>
+      {% if item.header %}<h3>{{ item.header }}</h3>{% endif %}
+      {% if item.excerpt %}
+        <p>{{ item.excerpt }}</p>
+        <p><a href="{{ link.url }}" target="{{ link.target }}"{% if link.target == '_blank' %} rel="noopener"{% endif %} aria-label="Go to {{ link.title }}">{{ __('More', 'vcf') }}</a></p>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+{% endblock %}

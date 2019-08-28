@@ -19,8 +19,8 @@
             "sub_fields": [
                 {
                     "key": "field_5d41adc14a17b",
-                    "label": "Color",
-                    "name": "color",
+                    "label": "Theme",
+                    "name": "theme",
                     "type": "button_group",
                     "instructions": "",
                     "required": 0,
@@ -31,30 +31,12 @@
                         "id": ""
                     },
                     "choices": {
-                        "text-red": "Red",
-                        "text-blue": "Blue"
-                    },
-                    "allow_null": 0,
-                    "default_value": "",
-                    "layout": "horizontal",
-                    "return_format": "value"
-                },
-                {
-                    "key": "field_5d41add74a17c",
-                    "label": "Background",
-                    "name": "bgcolor",
-                    "type": "button_group",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "swatches",
-                        "id": ""
-                    },
-                    "choices": {
-                        "bg-red": "Red",
-                        "bg-blue": "Blue"
+                        "bg-teal": "Teal\/White",
+                        "bg-yellow": "Yellow\/Black",
+                        "bg-blue": "Blue\/White",
+                        "bg-green": "Green\/White",
+                        "bg-brown": "Brown\/White",
+                        "bg-grey": "Grey\/White"
                     },
                     "allow_null": 0,
                     "default_value": "",
@@ -81,5 +63,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1564587596
+    "modified": 1567009087
 }

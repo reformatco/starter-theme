@@ -1,0 +1,28 @@
+{% extends "components/base.twig" %}
+
+{% block class %}m--facts{% endblock %}
+
+{% block inner %}
+
+  {% for fact in module.items %}
+    <figure class="fact">
+      {% set img = fact.image %}
+      {% if img %}
+      <picture>
+        <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
+        <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
+        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}">
+      </picture>
+      {% endif %}
+    </figure>
+    <figcaption>
+      {% if fact.header %}<header>{{ fact.header }}</header>{% endif %}
+      {{ fact.statement|wpautop }}
+      {% if fact.link %}
+      {% set link = fact.link %}
+      <a href="{{ link.url }}" target="{{ link.target }}"{% if link.target == '_blank' %} rel="noopener"{% endif %}>{{ __('Find out more', 'vcf') }}</a>
+      {% endif %}
+    </figcaption>
+  {% endfor %}
+
+{% endblock %}

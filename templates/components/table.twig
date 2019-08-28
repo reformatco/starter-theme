@@ -1,0 +1,20 @@
+{% extends "components/base.twig" %}
+
+{% block class %}m--table{% endblock %}
+
+{% block inner %}
+<div class="wrap:sml">
+  {% if module.row %}
+    <table>
+      <tbody>
+      {% for row in module.row %}
+        <tr>
+          <th>{{ row.head }}</th>
+          <td>{{ row.body }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}

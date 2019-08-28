@@ -1,0 +1,14 @@
+{% extends "components/base.twig" %}
+
+{% block class %}m--quote{% endblock %}
+
+{% block inner %}
+  <div class="wrap:sml">
+    <blockquote>
+      {{ module.quote|wpautop }}
+      <footer>
+        <cite>{% if module.link %}<a href="{{ module.link.url }}" target="{{ module.link.target }}"{% if module.link.target == '_blank' %} rel="noopener"{% endif %}>{% endif %}{{ module.citation }}{% if module.link %}</a>{% endif %}</cite>
+      </footer>
+    </blockquote>
+  </div>
+{% endblock %}

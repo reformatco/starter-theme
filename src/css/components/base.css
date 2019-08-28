@@ -1,0 +1,5 @@
+.wrap\:sml {
+  @screen md {
+    @apply w-1/2 mx-auto;
+  }
+}

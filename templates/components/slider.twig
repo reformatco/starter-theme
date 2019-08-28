@@ -1,6 +1,10 @@
 {% set total = module.photos|length %}
-<div class="slider" data-flickity{% if module.options %}='{ "{{module.options|join('":"true", "')}}":"true" }'{% endif %}>
+<div class="m--slider" data-flickity{% if module.options %}='{ "{{module.options|join('":"true", "')}}":"true" }'{% endif %}>
 {% for img in module.photos %}
-  <img src="{{ img.sizes.large }}" srcset="{{ img.sizes.large|retina(2) }} 2x" alt="{{ img.alt }}">
+  <picture>
+    <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
+    <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
+    <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}">
+  </picture>
 {% endfor %}
 </div>

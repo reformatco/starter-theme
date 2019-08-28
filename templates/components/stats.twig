@@ -1,0 +1,12 @@
+<section class="m--stats">
+  <header>{{ module.title }}</header>
+  <div class="md:flex -mx-4 md:justify-center">
+  {% for item in module.items %}
+    <figure class="md:w-1/4 px-4 text-center {{ item.theme|join(' ') }}">
+      <header>{{ item.top }}</header>
+      <span>{{ item.stat }}</span>
+      <footer>{{ item.top }}</footer>
+    </figure>
+  {% endfor %}
+  </div>
+</section>

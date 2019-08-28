@@ -1,11 +1,15 @@
 {% set total = module.slides|length %}
-<div class="banner">
+<div class="m--hero" data-flickity>
 {% for slide in module.slides %}
   {% set img = slide.photo %}
   {% set theme = slide.colours %}
   <figure class="slide {{theme|join(' ')}}">
     {% if img %}
-      <img src="{{ img.sizes.banner }}" srcset="{{ img.sizes.banner|retina(2) }} 2x" alt="{{ img.alt }}" class="w-full h-full object-cover">
+      <picture>
+        <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
+        <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
+        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="" class="w-full h-full object-cover">
+      </picture>
     {% endif %}
     {% if slide.overlay_text %}
       <figcaption class="slide-caption">{{slide.overlay_text}}</figcaption>

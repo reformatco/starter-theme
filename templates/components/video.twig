@@ -1,1 +1,11 @@
-{{module.video}}
+{% extends "components/base.twig" %}
+
+{% block class %}m--video{% endblock %}
+
+{% block inner %}
+  <div class="wrap:sml">
+    <div class="video">
+      {{ module.video }}
+    </div>
+  </div>
+{% endblock %}

@@ -31,22 +31,18 @@
   - color
   - bgcolor
 - hero
-  - slider
+  - slider (flickity-pagedots,autoplay5s,next/prev)
     - slide
-      - header
-      - subheader
-      - link
-      - blurb
-      - image
-      - color*
-      - bgcolor*
+      - overlay_text
+      - complementary_text
+      - photo
+      - theme
 - feature
   - item (up to 4)
-    - title
-    - blurb
-    - thumbnail
-    - color*
-    - bgcolor*
+    - header
+    - excerpt
+    - link
+    - theme (changes the highlight colour on text)
 - stats
   - item (up to 4)
     - size
@@ -55,7 +51,6 @@
     - text after
     - color*
     - bgcolor*
-
 - facts
   - slider
     - slide

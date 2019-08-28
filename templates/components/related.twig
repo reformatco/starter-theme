@@ -1,3 +1,27 @@
-{% for related in module.items %}
-
-{% endfor %}
+<section class="m--related {{ module.theme|join(' ') }}">
+  <header><h2>{{ module.title ?: 'Related' }}</h2></header>
+  <div class="md:flex -mx-4 md:justify-center">
+  {% for post in module.items %}
+    <article class="md:w-1/4 px-4 text-center">
+      <a href="{{ post.link }}">
+        {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.src('medium') }}" srcset="{{ post.thumbnail.src('medium') | retina(2) }} 2x" alt="" />
+        {% else %}
+        <img src="data:image/png;base64, {{ placeholder.profile }}">
+        {% endif %}
+      </a>
+      {% if post.categories %}
+        <ul class="categories">
+        {% for category in post.categories if category.slug != 'uncategorised' %}
+          <li><a href="{{ category.link }}">{{ category.name }}</a></li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      <h3>{{ post.title }}</h3>
+      <p class="entry-meta"><time datetime="{{ post.post_date }}">{{ post.post_date|date('F j, Y') }}</time></p>
+      {% set morelink = __('More', 'vcf') %}
+      <p>{{ post.preview.length(50).read_more(morelink) }}</p>
+    </article>
+  {% endfor %}
+  </div>
+</section>

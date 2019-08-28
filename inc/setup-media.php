@@ -4,7 +4,7 @@ add_image_size('banner', 1920, 1080, true);
 add_image_size('banner-mobile', 375, 240, true);
 add_image_size('slider', 1440, 768, true);
 add_image_size('grid-landscape', 960, 720, true);
-add_image_size('grid-portrait', 960, 1464, true);
+add_image_size('grid-portrait', 480, 720, true);
 add_image_size('square', 600, 600, true);
 add_image_size('map', 240, 180, true);
 
