@@ -92,6 +92,7 @@ class StarterSite extends Timber\Site {
 	 */
 	public function add_to_context( $context ) {
     $context['menu'] = new Timber\Menu('primary_navigation');
+    $context['quick_menu'] = new Timber\Menu('quick_navigation');
     $context['footer_menu'] = new Timber\Menu('footer_navigation');
     $context['footer_widgets'] = Timber::get_widgets('footer_widgets');
     $context['site'] = $this;
@@ -101,6 +102,9 @@ class StarterSite extends Timber\Site {
       'large' => 'iVBORw0KGgoAAAANSUhEUgAAAmwAAAFeCAQAAACSxouVAAADfElEQVR42u3UQREAAAjDMObfKxZAB1wioY+mpwBeibEBxgZgbADGBmBsAMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgYYm7EBxgZgbADGBmBsAMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgYYmwiAsQEYG4CxARgbgLEBxgZgbADGBmBsAMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsAMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgYYG4CxARgbgLEBGBtgbMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBmBsgLEBGBuAsQEYG4CxAcYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbADGBhgbgLEBGBuAsQEYG2BsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgZgbICxARgbgLEBGBuAsQHGBmBsAMYGYGwAxgYYG4CxARgbgLEBGBtgbMYGGBuAsQEYG4CxARgbYGwAxgZgbADGBmBsgLEBXLX8iaOD8uydngAAAABJRU5ErkJggg=='
     );
 
+    $custom_logo_url = wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ), 'full' );
+    $context['custom_logo_url'] = $custom_logo_url;
+
 		return $context;
 	}
 
@@ -108,7 +112,8 @@ class StarterSite extends Timber\Site {
 
 		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
-		add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'post-thumbnails' );
+    add_theme_support( 'custom-logo' );
 		add_theme_support(
 			'html5', array(
 				'comment-form',
@@ -136,6 +141,7 @@ class StarterSite extends Timber\Site {
   public function register_menus() {
     register_nav_menus(array(
       'primary_navigation' => 'Primary Navigation',
+      'quick_navigation' => 'Quick Navigation',
       'footer_navigation' => 'Footer Navigation'
     ));
   }
@@ -144,10 +150,10 @@ class StarterSite extends Timber\Site {
     register_sidebar(array(
       'name' => 'Footer Widgets',
       'id' => 'footer_widgets',
-      'before_widget' => '<section class="widget">',
+      'before_widget' => '<section class="w-1/2 lg:w-1/4 px-4 mb-8 lg:mb-0">',
       'after_widget' => '</section>',
-      'before_title' => '<header class="widget-header"><h3>',
-      'after_title' => '</h3></header>',
+      'before_title' => '<header class="font-bold mb-4 uppercase tracking-wide">',
+      'after_title' => '</header>',
     ) );
   }
 

@@ -1,3 +1,46 @@
 .header {
 
 }
+
+#searchtoggle,
+#burger {
+  .up {
+    @apply block;
+  }
+  .down {
+    @apply hidden;
+  }
+  &[aria-expanded="true"]{
+    .up {
+      @apply hidden;
+    }
+    .down {
+      @apply block;
+    }
+  }
+}
+
+#modal-nav {
+  transition:visibility 0s linear .33s, opacity .33s easeInOutQuint;
+}
+
+#searchbar {
+  transform:translateY(-100%);
+  transition:visibility 0s linear .33s, transform .33s easeInOutQuint;
+}
+
+.nav-active {
+  overflow:hidden;
+  #modal-nav {
+    transition-delay:0s;
+    @apply visible opacity-100;
+  }
+}
+
+.search-active {
+  #searchbar {
+    transition-delay:0s;
+    @apply visible;
+    transform:translateY(0);
+  }
+}

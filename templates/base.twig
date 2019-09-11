@@ -10,18 +10,63 @@
 
 		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
 
-    <header id="site-header" class="header" >
-			{% block header %}
-				<div class="wrap">
-					<div class="branding" role="banner">
-						<a class="logo" href="{{site.url}}" rel="home">{{site.name}}</a>
-					</div>
-					<nav id="navbar" class="navbar-menu" role="navigation">
-						{% include "menu.twig" with {'items': menu.get_items} %}
-					</nav>
-				</div>
-			{% endblock %}
-		</header>
+    <header id="site-header" class="fixed bg-black text-white z-50 w-full top-0">
+      {% block header %}
+      <div class="bg-black p-4 z-20 relative">
+        <div class="container mx-auto px-4">
+          <div class="flex -mx-4 justify-between items-center">
+            <div class="flex justify-start w-1/2 xl:w-1/4">
+              <a class="w-8 z-50" href="{{site.url}}" aria-title="{{site.name}}" role="banner">
+                {% if custom_logo_url %}
+                <img src="{{ custom_logo_url }}" alt="{{site.name}}">
+                {% else %}
+                  <span>{{site.name}}</span>
+                {% endif %}
+              </a>
+            </div>
+            <nav id="quicknav" role="navigation" class="hidden xl:block xl:w-1/2">
+              <ul class="list-reset inline-flex">
+                {% for item in quick_menu.get_items %}
+                <li class="{{ item.classes | join(' ') }}"><a class="mx-2" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </nav>
+            <div class="flex items-center justify-end w-1/2 xl:w-1/4">
+              <div id="searchtoggle" class="w-8 h-8 mx-4 relative flex flex-col cursor-pointer" aria-role="button" aria-label="Toggle search" tabindex="0" aria-expanded="false">
+                <svg class="up fill-current w-full h-full px-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/></svg>
+                <svg class="down fill-current w-full h-full px-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+              </div>
+              <div id="burger" class="w-8 h-8 relative flex flex-col cursor-pointer z-50" aria-role="button" aria-label="Toggle navigation" tabindex="0" aria-expanded="false">
+                <svg class="up fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+                <svg class="down fill-current w-full h-full px-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- search modal -->
+      <div id="searchbar" class="bg-white text-gray-900 w-full absolute left-0 z-10 invisible">
+        <div class="mx-4 md:mx-auto md:w-1/2 py-8 md:py-16">
+          <form action="#" class="w-full relative">
+            <label for="site-search" class="invisible absolute">Search the site:</label>
+            <input class="w-full leading-none h-16 p-4 pr-12 text-xl md:text-2xl border-gray-300 border-b border-solid focus:border-primary outline-none" type="search" id="site-search" name="q" aria-label="Search through site content" placeholder="Search">
+            <button class="absolute z-10 mt-2 outline-none right-0 text-secondary hover:text-primary focus:text-primary w-12 h-12">
+              <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+              <span class="hidden">Search</span>
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- nav modal -->
+      <div id="modal-nav" class="bg-black absolute top-0 left-0 w-full h-screen z-30 flex flex-col justify-center items-center opacity-0 invisible" role="dialog" tabindex="-1">
+        <div class="container mx-auto px-4">
+          <nav id="navbar" class="navbar-menu" role="navigation">
+            {% include "menu.twig" with {'items': menu.get_items} %}
+          </nav>
+        </div>
+      </div>
+      {% endblock %}
+    </header>
 
     <main id="content" role="main">
       {% block content %}
@@ -39,6 +84,61 @@
 
 				<p>Copyright {{"now"|date('Y')}}</p>
 			</footer>
+
+      <footer class="bg-gray-300 py-16">
+        <div class="container mx-auto px-4">
+          <div class="flex flex-wrap -mx-4">
+            <!--
+            <div class="w-1/2 lg:w-1/4 px-4 mb-8 lg:mb-0">
+              <header class="font-bold mb-4 uppercase tracking-wide">{{_e('Quick Links')}}</header>
+              <nav id="footernav" role="navigation">
+                <ul class="list-reset">
+                  {% for item in quick_menu.get_items %}
+                  <li class="{{ item.classes | join(' ') }}"><a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              </nav>
+            </div>
+            -->
+            {{footer_widgets}}
+            {# <div class="w-1/2 lg:w-1/4 px-4 mb-8 lg:mb-0">
+              <header class="font-bold mb-4 uppercase tracking-wide">Section</header>
+              <nav>
+                <ul class="inline-flex -mx-1">
+                  <li class="px-1">
+                    <a href="#" class="block w-12 md:w-6 h-12 md:h-6">
+                      <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                    </a>
+                  </li>
+                  <li class="px-1">
+                    <a href="#" class="block w-12 md:w-6 h-12 md:h-6">
+                      <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                    </a>
+                  </li>
+                  <li class="px-1">
+                    <a href="#" class="block w-12 md:w-6 h-12 md:h-6">
+                      <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="w-1/2 lg:w-1/4 px-4 mb-8 lg:mb-0">
+              <header class="font-bold mb-4 uppercase tracking-wide">Section</header>
+              <p class="font-serif text-lg leading-tight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit quibusdam magnam magni nulla dolorum?</p>
+            </div>
+            <div class="w-1/2 lg:w-1/4 px-4 mb-8 lg:mb-0">
+              <header class="font-bold mb-4 uppercase tracking-wide">Section</header>
+              <p class="font-serif text-lg leading-tight mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum reprehenderit quibusdam magnam magni nulla dolorum?</p>
+              <p class="font-serif text-lg leading-tight flex items-center">
+                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/></svg>
+                <span>+12 345 6789</span>
+              </p>
+            </div> #}
+          </div>
+        </div>
+      </footer>
+      {# {{"now"|date('Y')}} #}
 			{{ function('wp_footer') }}
 		{% endblock %}
     <!-- Website made by Reformat (https://reformat.co) -->
