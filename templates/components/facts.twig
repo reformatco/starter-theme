@@ -4,25 +4,43 @@
 
 {% block inner %}
 
+  <section class="w-full relative m--facts-inner" {% if module.items|length > 1 %}data-flickity{% endif %}>
+
   {% for fact in module.items %}
-    <figure class="fact">
+    <figure class="w-full h-full relative {{ fact.theme }}">
       {% set img = fact.image %}
       {% if img %}
       <picture>
         <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
         <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
-        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}">
+        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}" class="block w-full h-full object-cover object-center">
       </picture>
       {% endif %}
+      <figcaption class="z-10 absolute w-full h-full top-0 py-16">
+        <div class="container mx-auto px-4">
+          <div class="md:w-2/3 lg:w-1/2">
+            {% if fact.header %}
+            <div class="inline-flex items-center font-bold mb-4 uppercase tracking-wide">
+              <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 13.33a7 7 0 1 1 6 0V16H7v-2.67zM7 17h6v1.5c0 .83-.67 1.5-1.5 1.5h-3A1.5 1.5 0 0 1 7 18.5V17zm2-5.1V14h2v-2.1a5 5 0 1 0-2 0z"/></svg>
+              <span>{{ fact.header }}</span>
+            </div>
+            {% endif %}
+            <div class="text-3xl font-bold leading-tight">{{ fact.statement|wpautop }}</div>
+            {% if fact.link %}
+            {% set link = fact.link %}
+            <p class="mt-8">
+              <a href="{{ link.url }}" target="{{ link.target }}"{% if link.target == '_blank' %} rel="noopener"{% endif %} class="button bg-black border-black" aria-role="button">
+                {{ link.title }}
+                <svg class="fill-current w-4 h-4 ml-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+              </a>
+            </p>
+            {% endif %}
+          </div>
+        </div>
+      </figcaption>
     </figure>
-    <figcaption>
-      {% if fact.header %}<header>{{ fact.header }}</header>{% endif %}
-      {{ fact.statement|wpautop }}
-      {% if fact.link %}
-      {% set link = fact.link %}
-      <a href="{{ link.url }}" target="{{ link.target }}"{% if link.target == '_blank' %} rel="noopener"{% endif %}>{{ __('Find out more', 'vcf') }}</a>
-      {% endif %}
-    </figcaption>
   {% endfor %}
+
+  </section>
 
 {% endblock %}

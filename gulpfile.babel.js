@@ -6,6 +6,7 @@ import {
   parallel,
 } from 'gulp';
 import browsersync from 'browser-sync';
+import cssnano from 'gulp-cssnano';
 import del from 'del';
 import eslint from 'gulp-eslint';
 import gulpif from 'gulp-if';
@@ -13,6 +14,7 @@ import htmlmin from 'gulp-htmlmin';
 import imagemin from 'gulp-imagemin';
 import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
+import purgecss from 'gulp-purgecss';
 import replace from 'gulp-replace';
 import sass from 'gulp-sass';
 import sassGlob from 'gulp-sass-glob';
@@ -61,6 +63,19 @@ export const styles = () => src(`${config.srcPath}/${styleExt}/style.${styleExt}
   .pipe(gulpif(config.preprocessor === 'sass', sass()))
   .pipe(postcss())
   .pipe(gulpif(process.env.NODE_ENV === 'development', sourcemaps.write('.')))
+  .pipe(dest(`${config.assetsPath}css`))
+  .pipe(server.stream());
+
+export const editorStyles = () => src(`${config.srcPath}/css/editor-style.css`)
+  .pipe(postcss())
+  .pipe(purgecss({ content: [`${config.srcPath}/html/tinymce.html`] }))
+  .pipe(cssnano())
+  .pipe(dest('./'))
+  .pipe(server.stream());
+
+export const adminStyles = () => src(`${config.srcPath}/css/admin.css`)
+  .pipe(postcss())
+  .pipe(cssnano())
   .pipe(dest(`${config.assetsPath}css`))
   .pipe(server.stream());
 
@@ -114,7 +129,7 @@ export const scripts = () => src([`${config.srcPath}/js/app.js`])
         }),
       ],
     },
-    mode: process.env.NODE_ENV,
+    mode: process.env.NODE_ENV ? 'production' : 'development',
     devtool: process.env.NODE_ENV === 'development' ? 'inline-source-map' : true,
     output: { filename: 'bundle.js' },
     externals: { jquery: 'jQuery' },
@@ -123,13 +138,14 @@ export const scripts = () => src([`${config.srcPath}/js/app.js`])
   .pipe(server.stream());
 
 export const watchFiles = () => {
-  watch([`${config.srcPath}css/**/*`, `${config.srcPath}scss/**/*`], styles);
+  watch(`${config.srcPath}css/**/*`, series(styles, editorStyles, adminStyles));
+  watch('./tailwind.config.js', series(styles, editorStyles, adminStyles));
   watch(`${config.srcPath}js/**/*`, series(scriptLint, scripts));
   watch(`${config.srcPath}img/**/*`, images);
-  watch(['./**/*.php', './**/*.html'], reload);
+  watch(['./**/*.php', './**/*.twig'], reload);
 };
 
 export const js = series(scriptLint, scripts);
-export const dev = series(clean, parallel(styles, images, fonts, scripts), serve, watchFiles);
-export const build = series(clean, parallel(styles, images, fonts, scripts), miscFiles);
+export const dev = series(clean, editorStyles, adminStyles, parallel(styles, images, fonts, scripts), serve, watchFiles);
+export const build = series(clean, editorStyles, adminStyles, parallel(styles, images, fonts, scripts), miscFiles);
 export default dev;

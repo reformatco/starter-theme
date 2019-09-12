@@ -1,0 +1,8 @@
+.m--table {
+  tr:last-of-type {
+    th,
+    td {
+      @apply border-transparent;
+    }
+  }
+}

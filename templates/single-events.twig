@@ -1,0 +1,16 @@
+{% extends "single.twig" %}
+
+{% block pagebanner %}
+  <div class="py-16 md:py-32 text-center bg-gray-200 w-full">
+    <div class="container mx-auto px-4">
+      <div class="md:w-3/4 mx-auto">
+        <h1 class="mb-8 text-5xl font-bold">{{ post.title }}</h1>
+      </div>
+    </div>
+  </div>
+  {% include "partial/breadcrumbs.twig" %}
+{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+{% endblock %}

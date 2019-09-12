@@ -1,15 +1,17 @@
 {% extends "components/base.twig" %}
 
-{% block class %}m--text-row{% endblock %}
+{% block class %}m--text-row my-16{% endblock %}
 
 {% block inner %}
-  <div class="wrap:sml">
-    <article class="md:flex -mx-4">
-    {% for column in module.columns %}
-      <div class="px-4 md:flex-1">
-        {{column.text}}
-      </div>
-    {% endfor %}
-    </article>
+  <div class="container mx-auto px-4">
+    <div class="wrap:sml">
+      <article class="md:flex md:-mx-4">
+      {% for column in module.columns %}
+        <div class="md:flex-1 md:px-4 {{ column.size }}">
+          {{column.text}}
+        </div>
+      {% endfor %}
+      </article>
+    </div>
   </div>
 {% endblock %}

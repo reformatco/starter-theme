@@ -1,0 +1,16 @@
+{% extends "components/base.twig" %}
+
+{% block class %}m--aside my-16 w-full relative{% endblock %}
+
+{% block inner %}
+  <div class="w-full" data-flickity='{ "prevNextButtons": "false" }'>
+    {% for slide in module.items %}
+      {% set theme = slide.colours %}
+      <figure class="flex flex-col items-center justify-center text-center py-16 md:py-24 w-full {{theme|join(' ')}}">
+        <div class="w-3/4 md:w-1/2 leading-tight text-2xl">
+          {{ slide.text }}
+        </div>
+      </figure>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,108 @@
+/*! Flickity v2.2.1
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- flickity-button ---- */
+
+.flickity-button {
+  position: absolute;
+  border: none;
+  @apply bg-white text-black;
+}
+
+.flickity-button:hover {
+  background: white;
+  cursor: pointer;
+}
+
+.flickity-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #19F;
+}
+
+.flickity-button:active {
+  opacity: 0.6;
+}
+
+.flickity-button:disabled {
+  opacity: 0.3;
+  cursor: auto;
+  /* prevent disabled button from capturing pointer up event. #716 */
+  pointer-events: none;
+}
+
+.flickity-button-icon {
+  fill: currentColor;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+  top: 50%;
+  @apply w-8 h-8 z-40;
+  border-radius: 50%;
+  /* vertically center */
+  transform: translateY(-50%);
+}
+
+.flickity-prev-next-button.previous { @apply left-0 ml-8; }
+.flickity-prev-next-button.next { @apply right-0 mr-8; }
+
+
+.flickity-prev-next-button .flickity-button-icon {
+  /* position: absolute; */
+  @apply p-2 w-full h-full;
+}
+
+/* ---- page dots ---- */
+
+.flickity-page-dots {
+  @apply list-none p-0 absolute z-10 w-full flex justify-center bottom-0 mb-8;
+}
+
+.flickity-page-dots .dot {
+  @apply block mx-1 w-3 h-3 bg-transparent border border-solid border-black rounded-full;
+}
+
+.flickity-page-dots .dot.is-selected {
+  @apply bg-black;
+}

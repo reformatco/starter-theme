@@ -1,12 +1,18 @@
-<section class="m--stats">
-  <header>{{ module.title }}</header>
-  <div class="md:flex -mx-4 md:justify-center">
-  {% for item in module.items %}
-    <figure class="md:w-1/4 px-4 text-center {{ item.theme|join(' ') }}">
-      <header>{{ item.top }}</header>
-      <span>{{ item.stat }}</span>
-      <footer>{{ item.top }}</footer>
-    </figure>
-  {% endfor %}
+<section class="m--stats pt-16 pb-12">
+  <div class="container mx-auto px-4">
+    {% if module.title %}<header class="mb-8 w-full flex justify-center"><h2 class="font-bold text-2xl">{{ module.title }}</header>{% endif %}
+    <div class="md:flex md:-mx-4 md:justify-center md:items-center md:flex-wrap">
+    {% for item in module.items %}
+      <figure class="flex justify-center md:block mb-4 md:px-4">
+        <div class="rounded-full {{ item.size }} {{ item.theme|join(' ') }}">
+          <div class="flex flex-col items-center justify-center p-4 w-full h-full">
+            <header class="font-bold uppercase text-center tracking-wide leading-none">{{ item.top }}</header>
+            <span class="font-semibold my-2 leading-none">{{ item.stat }}</span>
+            <footer class="font-bold uppercase tracking-wide leading-none">{{ item.top }}</footer>
+          </div>
+        </div>
+      </figure>
+    {% endfor %}
+    </div>
   </div>
 </section>

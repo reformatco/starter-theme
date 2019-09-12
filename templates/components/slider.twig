@@ -1,10 +1,16 @@
-{% set total = module.photos|length %}
-<div class="m--slider" data-flickity{% if module.options %}='{ "{{module.options|join('":"true", "')}}":"true" }'{% endif %}>
-{% for img in module.photos %}
-  <picture>
-    <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
-    <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
-    <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}">
-  </picture>
-{% endfor %}
-</div>
+{% extends "components/base.twig" %}
+
+{% block inner %}
+  <div class="container mx-auto px-4 my-8">
+    {% set total = module.photos|length %}
+    <div class="m--slider my-8" data-flickity{% if module.options %}='{ "{{module.options|join('":"true", "')}}":"true" }'{% endif %}>
+    {% for img in module.photos %}
+      <picture>
+        <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
+        <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
+        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="{{ img.alt }}">
+      </picture>
+    {% endfor %}
+    </div>
+  </div>
+{% endblock %}

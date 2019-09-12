@@ -1,9 +1,26 @@
 {% extends "components/base.twig" %}
 
-{% block class %}m--downloads{% endblock %}
+{% block class %}m--downloads my-16{% endblock %}
 
 {% block inner %}
-<div class="wrap:sml">
-  <p>downloads here</p>
+<div class="container mx-auto px-4">
+
+    <div class="wrap:sml">
+      {% if module.title %}<header class="mb-8"><h2 class="font-bold text-2xl">{{ module.title }}</h2></header>{% endif %}
+      <ul class="list-reset">
+        {% for doc in module.files %}
+        {% set file = doc.file %}
+        <li class="mb-4">
+          <a href="{{ file.url }}" download class="flex items-center text-primary hover:text-blue-900">
+            <div class="block w-8 h-8 rounded-full bg-primary text-white">
+              <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 16.172l-6.071-6.071-1.414 1.414L10 20l.707-.707 7.778-7.778-1.414-1.414L11 16.172V0H9z"/></svg>
+            </div>
+            <span class="font-bold ml-2">{{ file.title }}</span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
 </div>
 {% endblock %}

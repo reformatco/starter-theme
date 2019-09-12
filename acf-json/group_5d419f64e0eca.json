@@ -31,15 +31,16 @@
                         "id": ""
                     },
                     "choices": {
-                        "bg-teal": "Teal\/White",
-                        "bg-yellow": "Yellow\/Black",
+                        "bg-transparent text-black": "Default",
+                        "bg-teal text-white": "Teal\/White",
+                        "bg-yellow text-black": "Yellow\/Black",
                         "bg-blue": "Blue\/White",
                         "bg-green": "Green\/White",
                         "bg-brown": "Brown\/White",
                         "bg-grey": "Grey\/White"
                     },
                     "allow_null": 0,
-                    "default_value": "",
+                    "default_value": "bg-transparent text-black",
                     "layout": "horizontal",
                     "return_format": "value"
                 }
@@ -63,5 +64,5 @@
     "hide_on_screen": "",
     "active": 0,
     "description": "",
-    "modified": 1567009087
+    "modified": 1568280301
 }

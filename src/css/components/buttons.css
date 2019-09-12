@@ -1,0 +1,15 @@
+.button {
+  @apply flex items-center text-center py-2 px-4 uppercase tracking-wide border border-solid font-bold text-white transition;
+  @apply bg-primary text-white border-primary;
+  @screen md {
+    @apply inline-flex;
+  }
+  &:hover,
+  &:focus {
+    @apply bg-transparent border-white;
+  }
+
+  &.outline {
+    @apply bg-transparent;
+  }
+}

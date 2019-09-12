@@ -1,20 +1,22 @@
 {% extends "components/base.twig" %}
 
-{% block class %}m--table{% endblock %}
+{% block class %}m--table my-16{% endblock %}
 
 {% block inner %}
-<div class="wrap:sml">
-  {% if module.row %}
-    <table>
-      <tbody>
-      {% for row in module.row %}
-        <tr>
-          <th>{{ row.head }}</th>
-          <td>{{ row.body }}</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  {% endif %}
+<div class="container mx-auto px-4">
+  <div class="wrap:sml">
+    {% if module.row %}
+      <table class="w-full text-xs md:text-base">
+        <tbody class="w-full">
+        {% for row in module.row %}
+          <tr class="flex w-full">
+            <th class="py-2 border-b border-black w-48 md:w-1/4 text-left">{{ row.head }}</th>
+            <td class="py-2 border-b border-black w-full">{{ row.body }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

@@ -3,18 +3,20 @@
 {% block class %}m--image-row{% endblock %}
 
 {% block inner %}
-  <div class="md:flex -mx-4">
-  {% set total = module.images|length %}
-  {% for image in module.images %}
-    {% set img = image.image %}
-    {% if img %}
-    <figure class="px-4">
-      <img src="{{ img.sizes.square }}" srcset="{{ img.sizes.square|retina(2) }} 2x" alt="{{ img.alt }}">
-      {% if img.caption %}
-      <figcaption>{{img.caption}}</figcaption>
+  <div class="container mx-auto px-4 my-8">
+    <div class="md:flex md:-mx-4">
+    {% set total = module.images|length %}
+    {% for image in module.images %}
+      {% set img = image.image %}
+      {% if img %}
+      <figure class="mb-8 md:px-4 md:flex-1">
+        <img src="{{ img.sizes.square }}" srcset="{{ img.sizes.square|retina(2) }} 2x" alt="{{ img.alt }}">
+        {% if img.caption %}
+        <figcaption class="mt-2 text-xs text-gray-500">{{img.caption}}</figcaption>
+        {% endif %}
+      </figure>
       {% endif %}
-    </figure>
-    {% endif %}
-  {% endfor %}
+    {% endfor %}
+    </div>
   </div>
 {% endblock %}

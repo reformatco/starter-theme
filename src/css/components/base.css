@@ -3,3 +3,11 @@
     @apply w-1/2 mx-auto;
   }
 }
+
+.sr-only {
+  z-index:999;
+  @apply inline-block bg-primary text-white p-4;
+  &:focus {
+    @apply fixed p-4 !important;
+  }
+}

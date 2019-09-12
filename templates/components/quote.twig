@@ -3,12 +3,21 @@
 {% block class %}m--quote{% endblock %}
 
 {% block inner %}
-  <div class="wrap:sml">
-    <blockquote>
-      {{ module.quote|wpautop }}
-      <footer>
-        <cite>{% if module.link %}<a href="{{ module.link.url }}" target="{{ module.link.target }}"{% if module.link.target == '_blank' %} rel="noopener"{% endif %}>{% endif %}{{ module.citation }}{% if module.link %}</a>{% endif %}</cite>
-      </footer>
-    </blockquote>
+  <div class="container mx-auto px-4">
+    <div class="wrap:sml">
+      <figure class="my-16 text-primary pl-12 xl:pl-0 lg:w-3/4 relative">
+        <svg class="fill-current opacity-50 w-8 h-8 -ml-12 absolute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M464 256h-80v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8c-88.4 0-160 71.6-160 160v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48zm-288 0H96v-64c0-35.3 28.7-64 64-64h8c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24h-8C71.6 32 0 103.6 0 192v240c0 26.5 21.5 48 48 48h128c26.5 0 48-21.5 48-48V304c0-26.5-21.5-48-48-48z"/></svg>
+        <blockquote class="italic font-serif mb-4 text-lg">
+          {{ module.quote|wpautop }}
+        </blockquote>
+        <figcaption class="flex flex-col">
+          {% if module.link %}<a href="{{ module.link.url }}" target="{{ module.link.target }}"{% if module.link.target == '_blank' %} rel="noopener"{% endif %}>{% endif %}
+          <span class="uppercase tracking-wide text-sm">
+            {{ module.citation }}
+          </span>
+          {% if module.link %}</a>{% endif %}
+        </figcaption>
+      </figure>
+    </div>
   </div>
 {% endblock %}

@@ -94,6 +94,9 @@
 
 .swatches {
   .acf-button-group {
+    .bg-transparent {
+      background: transparent;
+    }
     .bg-teal {
       background-color: rgb(99,187,161);
     }

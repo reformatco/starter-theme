@@ -1,0 +1,11 @@
+.m--facts-inner {
+  height:50vh;
+}
+
+.m--facts {
+  .flickity-prev-next-button {
+    top:auto;
+    @apply bottom-0 mb-6;
+    transform: translateY(0);
+  }
+}

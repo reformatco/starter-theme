@@ -1,0 +1,7 @@
+{% if post.categories %}
+  <ul class="block font-bold mb-4 uppercase text-sm tracking-wide inline-flex -mx-2 flex-wrap">
+  {% for category in post.categories if category.slug != 'uncategorised' %}
+    <li class="px-2"><a href="{{ category.link }}" class="text-primary hover:underline focus:underline">{{ category.name }}</a></li>
+  {% endfor %}
+  </ul>
+{% endif %}

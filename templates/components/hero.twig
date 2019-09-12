@@ -1,22 +1,37 @@
 {% set total = module.slides|length %}
-<div class="m--hero" data-flickity>
+<div class="m--hero w-full h-screen relative" data-flickity>
 {% for slide in module.slides %}
   {% set img = slide.photo %}
   {% set theme = slide.colours %}
-  <figure class="slide {{theme|join(' ')}}">
+  <figure class="slide w-full h-full relative z-10 {{theme|join(' ')}}">
     {% if img %}
-      <picture>
+      <picture class="z-10">
         <source srcset="{{ img.sizes.banner }} 1x,{{ img.sizes.banner|retina(2) }} 2x" media="(min-width: 1280px)">
         <source srcset="{{ img.sizes.large }} 1x,{{ img.sizes.large|retina(2) }} 2x" media="(min-width: 768px)">
-        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="" class="w-full h-full object-cover">
+        <img src="{{ img.sizes['banner-mobile'] }}" srcset="{{ img.sizes['banner-mobile']|retina(2) }} 2x" alt="" class="block w-full h-full object-cover object-center">
       </picture>
     {% endif %}
     {% if slide.overlay_text %}
-      <figcaption class="slide-caption">{{slide.overlay_text}}</figcaption>
-    {% endif %}
-
-    {% if slide.comp_text %}
-      <aside class="slide-compliment">{{slide.comp_text}}</aside>
+      <figcaption class="slide-caption z-20 absolute w-full h-full top-0 flex flex-col items-center justify-center">
+        <div class="md:w-1/2 text-center ">
+          {% if slide.overlay_text.header %}<h1 class="font-bold text-5xl">{{slide.overlay_text.header}}</h1>{% endif %}
+          {% if slide.overlay_text.subheader %}<h2 class="text-3xl font-bold leading-tight">{{slide.overlay_text.subheader}}</h2>{% endif %}
+        </div>
+        {% if slide.comp_text %}
+          <div class="absolute w-full bottom-0 mb-16">
+            <div class="container mx-auto px-4">
+              <aside class="md:w-1/3 slide-compliment">
+                {% if slide.comp_text.header %}<h3 class="block font-bold mb-4 uppercase tracking-wide">
+                <a href="{{ slide.comp_text.link }}" class="hover:underline focus:underline">
+                {{slide.comp_text.header}}
+                </a>
+                </h3>{% endif %}
+                {% if slide.comp_text.text %}<p class="leading-tight text-sm">{{slide.comp_text.text}}</p>{% endif %}
+              </aside>
+            </div>
+          </div>
+        {% endif %}
+      </figcaption>
     {% endif %}
   </figure>
 {% endfor %}

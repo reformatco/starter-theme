@@ -1,9 +1,20 @@
-<article class="tease tease-{{post.post_type}} bg-gray-200" id="tease-{{post.ID}}">
-	{% block content %}
-		<h2><a href="{{post.link}}">{{post.title}}</a></h2>
-		<p>{{post.preview}}</p>
-		{% if post.get_thumbnail %}
-			<img src="{{post.thumbnail.src}}" />
-		{% endif %}
-	{% endblock %}
+<article class="md:w-1/2 lg:w-1/4 md:px-4 mb-8 lg:mb-0 tease-{{post.post_type}}" id="tease-{{post.ID}}">
+  {% block content %}
+  <a href="{{ post.link }}" class="block mb-4">
+    {% if post.thumbnail %}
+    <img src="{{ post.thumbnail.src('medium') }}" srcset="{{ post.thumbnail.src('medium') | retina(2) }} 2x" alt="" class="w-full h-auto" />
+    {% else %}
+    <img src="data:image/png;base64, {{ placeholder.profile }}">
+    {% endif %}
+  </a>
+  {% include "partial/categories.twig" %}
+  <h3 class="font-bold mb-4 text-xl leading-tight">{{ post.title }}</h3>
+  <p class="leading-tight entry-meta">{{ post.preview.length(50) }}</p>
+  <p class="text-sm text-secondary mt-4 inline-flex items-center">
+    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"/></svg>
+    <time datetime="{{ post.post_date }}">{{ post.post_date|date('F j, Y') }}</time>
+  </p>
+  {# {% set morelink = __('More', 'vcf') %} #}
+  {# <p>{{ post.preview.length(50).read_more(morelink) }}</p> #}
+  {% endblock %}
 </article>

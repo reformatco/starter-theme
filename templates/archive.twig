@@ -1,9 +1,12 @@
-{# This file demonstrates using most of the index.twig template and modifying 
+{# This file demonstrates using most of the index.twig template and modifying
    just a small part. See `search.twig` for an example of another approach #}
 
 {% extends "index.twig" %}
 
+{% block title %}
+  <h1 class="mb-8 text-5xl font-semibold">{{ _e('News Archive') }}</h1>
+{% endblock %}
+
 {% block content %}
-  <h3>This is my archive</h3>
   {{ parent() }}
 {% endblock %}

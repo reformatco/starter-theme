@@ -1,7 +1,10 @@
 import 'babel-polyfill';
 import $ from 'jquery';
+import Flickity from 'flickity';
+import 'flickity-fade';
 import fitVids from './plugins/jquery.fitvids';
 import './components/aria-menu';
+import Stickyfill from './components/stickyfill.es6';
 
 const isPhone = () => {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
@@ -28,6 +31,9 @@ $(() => {
     if ($('.m--video .video').length) {
       $('.m--video .video').fitVids();
     }
+
+    const stickyelem = $('.sticky');
+    Stickyfill.add(stickyelem);
 
     let disabledHandle;
     const navbar = document.querySelector('#modal-nav');

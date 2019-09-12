@@ -1,60 +1,37 @@
 {% if posts.pagination.pages is not empty %}
-    <nav class="pagination-block">
-        <ul class="pagination">
-            {% if pagination.pages|first and pagination.pages|first.current != true %}
-                <li class="first btn">
-                    <a href="{{ pagination.pages|first.link }}">First</a>
-                </li>
-            {% else %}
-                <li class="first btn disabled">
-                    <button disabled>First</button>
-                </li>
-            {% endif %}
+  <div class="container mx-auto px-4">
+    <div class="mt-16 flex items-center justify-between text-black font-bold">
 
-            {% if pagination.prev %}
-                <li class="prev btn">
-                    <a href="{{ pagination.prev.link }}">Previous</a>
-                </li>
-            {% else %}
-                <li class="prev btn disabled">
-                    <button disabled>Previous</button>
-                </li>
-            {% endif %}
+      {% if pagination.prev %}
+      <a href="{{ pagination.prev.link }}" class="block w-8 h-8 mr-4 bg-primary transition hover:bg-black focus:bg-black rounded-full text-white" aria-role="button" aria-label="Scroll down">
+        <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.828 9l6.071-6.071-1.414-1.414L0 10l.707.707 7.778 7.778 1.414-1.414L3.828 11H20V9H3.828z"/></svg>
+      </a>
+      {% else %}
+      <span class="block w-8 h-8 mr-4 bg-gray-400 pointer-events-none transition rounded-full text-white" aria-role="button" aria-label="Scroll down">
+        <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M3.828 9l6.071-6.071-1.414-1.414L0 10l.707.707 7.778 7.778 1.414-1.414L3.828 11H20V9H3.828z"/></svg>
+      </span>
+      {% endif %}
 
-            {% for page in pagination.pages %}
-                {% if page.link %}
-                    <li>
-                        <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
-                    </li>
-                {% else %}
-                    <li class="current">
-                        <span class="{{ page.class }}">{{ page.title }}</span>
-                    </li>
-                {% endif %}
-            {% endfor %}
-
-            {% if pagination.next %}
-                <li class="next btn">
-                    <a href="{{ pagination.next.link }}">
-                        Next
-                    </a>
-                </li>
+      <nav class="flex-1" role="navigation" aria-label="Pagination Navigation">
+        <ul class="flex justify-center">
+          {% for page in posts.pagination.pages %}
+            {% if page.link %}
+            <li><a href="{{ page.link }}" class="opacity-50 mx-2 hover:text-primary focus:text-primary hover:opacity-100 focus:opacity-100 transition {{ page.class }}">{{ page.title }}</a></li>
             {% else %}
-                <li class="next btn disabled">
-                    <button disabled>
-                        Next
-                    </button>
-                </li>
+            <li><a href="#" class="mx-2 text-primary cursor-default {{ page.class }}" aria-label="Current Page, Page {{ page.title }}" aria-current="true">{{ page.title }}</a></li>
             {% endif %}
-            {% if pagination.pages|last and pagination.pages|last.current != true %}
-                <li class="last btn">
-                    <a href="{{ pagination.pages|last.link }}">Last</a>
-                </li>
-            {% else %}
-                <li class="last btn disabled">
-                    <button disabled>Last</button>
-                </li>
-            {% endif %}
+          {% endfor %}
         </ul>
-    </nav>
+      </nav>
+      {% if pagination.next %}
+      <a href="{{ pagination.next.link }}" class="block w-8 h-8 ml-4 bg-primary transition hover:bg-black focus:bg-black rounded-full text-white" aria-role="button" aria-label="Scroll down">
+        <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+      </a>
+      {% else %}
+      <span class="block w-8 h-8 ml-4 bg-gray-400 pointer-events-none transition rounded-full text-white" aria-role="button" aria-label="Scroll down">
+        <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
+      </span>
+      {% endif %}
+    </div>
+  </div>
 {% endif %}

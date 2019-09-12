@@ -1,3 +1,31 @@
 .m--stats {
 
 }
+
+.big-stat {
+  @apply bg-secondary text-white w-64 h-64;
+  header,
+  footer {
+    @apply text-sm;
+  }
+  span {
+    @apply text-5xl;
+    @screen md {
+      @apply text-6xl;
+    }
+  }
+}
+
+.sml-stat {
+  @apply bg-secondary text-white w-48 h-48;
+  header,
+  footer {
+    @apply text-xs;
+  }
+  span {
+    @apply text-4xl;
+    @screen md {
+      @apply text-5xl;
+    }
+  }
+}

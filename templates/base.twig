@@ -8,9 +8,9 @@
 
 	<body class="{{body_class}}">
 
-		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+		<a class="sr-only sr-only-focusable" href="#content">{{ _e( 'Skip to content') }}</a>
 
-    <header id="site-header" class="fixed bg-black text-white z-50 w-full top-0">
+    <header id="site-header" class="relative bg-black text-white z-50 w-full top-0">
       {% block header %}
       <div class="bg-black p-4 z-40 relative transition opacity-100 header-bg">
         <div class="container mx-auto px-4">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <!-- nav modal -->
-      <div id="modal-nav" class="bg-primary absolute top-0 left-0 w-full h-screen z-30 flex flex-col justify-center items-center opacity-0 invisible" role="dialog" tabindex="-1">
+      <div id="modal-nav" class="bg-primary absolute top-0 left-0 w-full h-screen z-30 flex flex-col justify-center items-center opacity-0 invisible overflow-hidden" role="dialog" tabindex="-1">
         <div class="container mx-auto px-4">
           <nav class="navbar-menu" role="navigation">
             {% include "menu.twig" with {'items': menu.get_items} %}
@@ -75,17 +75,7 @@
     </main>
 
 		{% block footer %}
-			<footer id="site-footer">
-        {{footer_widgets}}
-
-        <nav id="footer-links" role="navigation">
-					{% include "menu.twig" with {'items': footer_menu.get_items} %}
-				</nav>
-
-				<p>Copyright {{"now"|date('Y')}}</p>
-			</footer>
-
-      <footer class="bg-gray-300 py-16">
+      <footer class="bg-gray-300 py-16 mt-32 md:mt-60" id="site-footer">
         <div class="container mx-auto px-4">
           <div class="flex flex-wrap -mx-4">
             <!--
