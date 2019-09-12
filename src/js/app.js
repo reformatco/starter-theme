@@ -1,6 +1,7 @@
 import 'babel-polyfill';
 import $ from 'jquery';
 import fitVids from './plugins/jquery.fitvids';
+import './components/aria-menu';
 
 const isPhone = () => {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
@@ -14,9 +15,9 @@ if ('querySelector' in document && 'addEventListener' in window) {
 }
 
 let state = {
-  navOpen: false,
+  // navOpen from aria-menu
+  navOpen: true,
   searchOpen: false,
-  subnavOpen: false,
   flkty: {},
 };
 
@@ -31,22 +32,14 @@ $(() => {
     let disabledHandle;
     const navbar = document.querySelector('#modal-nav');
 
-    $('#burger').on('click', () => {
-      $('body').toggleClass('nav-active');
+    $('.navbar-burger').on('click', () => {
       if (!state.navOpen) {
-        $('#burger').attr('aria-expanded','true');
         if (state.searchOpen) {
           $('#searchtoggle').attr('aria-expanded','false');
           document.getElementById("site-search").blur();
           state.searchOpen = false;
           $('body').removeClass('search-active');
         }
-      } else {
-        if (state.subnavOpen) {
-          state.subnavOpen = false;
-          // document.querySelector('.menu-bar').classList.remove('subnav-active');
-        }
-        $('#burger').attr('aria-expanded','false');
       }
       state.navOpen = !state.navOpen;
     });

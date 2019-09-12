@@ -3,7 +3,7 @@ const navState = {
   subnav: false,
 };
 
-const navbar = document.getElementById('navbar');
+const navbar = document.getElementById('site-header');
 
 export default function toggleNavigation(event) {
 
@@ -11,6 +11,7 @@ export default function toggleNavigation(event) {
   const activeSubnav = navbar.querySelector('.menu-item-link[aria-expanded="true"]');
 
   if (target.classList.contains('navbar-burger') || target.parentNode.classList.contains('navbar-burger')) {
+
     const burger = navbar.querySelector('.navbar-burger');
     if (navState.toggled) {
       navState.toggled = false;
@@ -22,10 +23,10 @@ export default function toggleNavigation(event) {
         navState.subnav = false;
       }
 
-      document.querySelector('body').classList.remove('navbar-active');
+      document.querySelector('body').classList.remove('nav-active');
     } else {
       navState.toggled = true;
-      document.querySelector('body').classList.add('navbar-active');
+      document.querySelector('body').classList.add('nav-active');
       burger.setAttribute('aria-expanded', true);
     }
   }

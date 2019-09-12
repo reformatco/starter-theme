@@ -35,6 +35,15 @@
     transition-delay:0s;
     @apply visible opacity-100;
   }
+  #quicknav {
+    @apply opacity-0;
+  }
+  #searchtoggle {
+    @apply pointer-events-none opacity-0;
+  }
+  .header-bg {
+    @apply bg-transparent;
+  }
 }
 
 .search-active {
@@ -42,5 +51,19 @@
     transition-delay:0s;
     @apply visible;
     transform:translateY(0);
+  }
+}
+
+.sub-menu {
+  @apply invisible;
+  transform:translateX(100%);
+  transition:visibility 0s linear .33s, transform .33s easeInOutQuint;
+}
+
+.menu-item-link[aria-expanded=true] {
+  & + .sub-menu {
+    transition-delay:0s;
+    @apply visible;
+    transform:translateX(0);
   }
 }

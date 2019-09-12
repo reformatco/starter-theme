@@ -2,10 +2,10 @@
 	<ul class="text-4xl leading-tight w-full">
 	{% for item in items %}
 		<li class="{{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}{% if item.children %}{% include 'partial/toggle.twig' %}{% endif %}</a>
+			<a target="{{ item.target }}" href="{{ item.link }}" class="menu-item-link inline-flex items-center" {% if item.children %}aria-haspopup="true" aria-expanded="false"{% endif %}>{{ item.title }}{% if item.children %}{% include 'partial/toggle.twig' %}{% endif %}</a>
 			{% if item.children %}
-        <div class="absolute bg-secondary w-1/2 h-screen top-0 flex items-center text-black px-8 right-0">
-          <ul class="sub-menu">
+        <div class="absolute bg-secondary md:w-1/2 h-screen top-0 flex items-center text-white px-8 right-0 sub-menu">
+          <ul>
           {% for item in item.children %}
             <li><a class="{{ item.classes | join(' ') }}" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a></li>
           {% endfor %}

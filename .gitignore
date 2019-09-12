@@ -3,3 +3,5 @@ wp-content
 node_modules
 .cache
 dist
+fontawesome
+zondicons
