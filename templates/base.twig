@@ -47,9 +47,9 @@
       <!-- search modal -->
       <div id="searchbar" class="bg-white text-gray-900 w-full absolute left-0 z-10 invisible">
         <div class="mx-4 md:mx-auto md:w-1/2 py-8 md:py-16">
-          <form action="#" class="w-full relative">
+          <form action="{{ site.url }}/" method="GET" class="w-full relative">
             <label for="site-search" class="invisible absolute">Search the site:</label>
-            <input class="w-full leading-none h-16 p-4 pr-12 text-xl md:text-2xl border-gray-300 border-b border-solid focus:border-primary outline-none" type="search" id="site-search" name="q" aria-label="Search through site content" placeholder="Search">
+            <input class="w-full leading-none h-16 p-4 pr-12 text-xl md:text-2xl border-gray-300 border-b border-solid focus:border-primary outline-none" type="search" id="site-search" name="s" aria-label="Search through site content" placeholder="Search">
             <button class="absolute z-10 mt-2 outline-none right-0 text-secondary hover:text-primary focus:text-primary w-12 h-12">
               <svg class="fill-current w-full h-full p-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16.172 9l-6.071-6.071 1.414-1.414L20 10l-.707.707-7.778 7.778-1.414-1.414L16.172 11H0V9z"/></svg>
               <span class="hidden">Search</span>

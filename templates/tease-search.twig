@@ -1,26 +1,21 @@
-<article class="md:flex md:-mx-4 w-full mt-16 tease-{{post.post_type}}" id="tease-{{post.ID}}">
+<article class="w-full mt-16 md:w-1/2 mx-auto tease-{{post.post_type}}" id="tease-{{post.ID}}">
   {% block content %}
-  <a href="{{ post.link }}" class="block mb-4 md:mb-0 md:w-1/3 md:px-4">
-    {% if post.thumbnail %}
-    <img src="{{ post.thumbnail.src('medium') }}" srcset="{{ post.thumbnail.src('medium') | retina(2) }} 2x" alt="" class="w-full h-auto" />
-    {% else %}
-    <img src="data:image/png;base64, {{ placeholder.profile }}">
-    {% endif %}
-  </a>
-  <div class="flex-1 md:px-4">
-    {% include "partial/categories.twig" %}
+    <span class="block font-bold mb-4 uppercase text-sm tracking-wide text-primary">{{ post.post_type }}</span>
     <h3 class="font-bold mb-4 text-xl leading-tight"><a href="{{ post.link }}" class="hover:underline focus:underline">{{ post.title }}</a></h3>
     <p class="leading-tight entry-meta">{{ post.preview.length(50).read_more(false) }}</p>
+    {% if post.post_type != "page" %}
     <p class="text-sm text-secondary mt-4">
       <span class="mr-4 inline-flex items-center">
         <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"/></svg>
         <time datetime="{{ post.post_date }}">{{ post.post_date|date('F j, Y') }}</time>
       </span>
+      {% if post.post_type == "events" %}
       <span class="inline-flex items-center">
         <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M444.52 3.52L28.74 195.42c-47.97 22.39-31.98 92.75 19.19 92.75h175.91v175.91c0 51.17 70.36 67.17 92.75 19.19l191.9-415.78c15.99-38.39-25.59-79.97-63.97-63.97z"/></svg>
         <span>Location</span>
       </span>
+      {% endif %}
     </p>
-  </div>
+    {% endif %}
   {% endblock %}
 </article>

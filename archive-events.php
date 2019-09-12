@@ -2,27 +2,24 @@
 
 /* Template Name: Archive - Events */
 
-$templates = array( 'archive.twig', 'index.twig' );
+global $paged;
+if (!isset($paged) || !$paged){
+    $paged = 1;
+}
+
+$templates = array( 'archive-events.twig', 'archive.twig', 'index.twig' );
 
 $context = Timber::context();
 
 $context['title'] = 'Archive';
-if ( is_day() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'D M Y' );
-} else if ( is_month() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'M Y' );
-} else if ( is_year() ) {
-	$context['title'] = 'Archive: ' . get_the_date( 'Y' );
-} else if ( is_tag() ) {
-	$context['title'] = single_tag_title( '', false );
-} else if ( is_category() ) {
-	$context['title'] = single_cat_title( '', false );
-	array_unshift( $templates, 'archive-' . get_query_var( 'cat' ) . '.twig' );
-} else if ( is_post_type_archive() ) {
-	$context['title'] = post_type_archive_title( '', false );
-	array_unshift( $templates, 'archive-' . get_post_type() . '.twig' );
-}
 
-$context['posts'] = new Timber\PostQuery();
+$args = array(
+  'post_type' => 'events',
+  'ignore_sticky_posts' => 1,
+  'posts_per_page' => get_option('posts_per_page'),
+  'post_parent' => 0,
+  'paged' => $paged,
+);
+$context['posts'] = new Timber\PostQuery($args);
 
 Timber::render( $templates, $context );

@@ -2,12 +2,30 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {# see `base.twig:27` for where this block's content will be inserted #}
-  <div class="content-wrapper">
-    {% for post in posts %}
-      {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-    {% endfor %}
+
+  <div class="py-16 md:py-32 text-center bg-gray-200 w-full">
+    <div class="container mx-auto px-4">
+      <div class="md:w-3/4 mx-auto">
+      {% block title %}
+        <h1 class="mb-8 text-5xl font-semibold">{{ title }}</h1>
+        <p>Found {{ posts|length }} results for the term <span class="font-bold">{{ sq }}</span></p>
+      {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4">
+
+    <div class="py-16">
+      {% block posts %}
+        {% for post in posts %}
+          {% include ['tease-search.twig'] %}
+        {% endfor %}
+      {% endblock %}
+    </div>
 
     {% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
   </div>
+
 {% endblock %}
+
