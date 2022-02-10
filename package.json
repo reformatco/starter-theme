@@ -42,7 +42,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-webp": "^4.0.1",
     "imagesloaded": "^4.1.4",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "postcss-color-function": "^4.1.0",
     "postcss-import": "^12.0.1",
     "postcss-import-ext-glob": "^1.1.0",
