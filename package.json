@@ -18,7 +18,7 @@
     "@fullhuman/postcss-purgecss": "^1.2.0",
     "babel-loader": "^8.0.5",
     "breakpoint-sass": "^2.7.1",
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.27.10",
     "compass-mixins-fixed": "^1.0.1",
     "cssnano": "^4.1.10",
     "del": "^4.1.1",
